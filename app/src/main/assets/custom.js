@@ -3,7 +3,7 @@
 // @namespace    yeyu
 // @version      0.7
 // @description  叔叔不约只配女，你懂我的意思吧
-// @author       夜雨
+// @author
 // @match        *://*.shushubuyue.net/*
 // @match        *://*.shushubuyue.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shushubuyue.net
@@ -48,17 +48,17 @@
         const toggleBtn = document.createElement('div');
         toggleBtn.id = 'shushubuyue-toggle';
         toggleBtn.style.position = 'fixed';
-        toggleBtn.style.top = '25px';
-        toggleBtn.style.right = '20px';
+        toggleBtn.style.top = '10px';
+        toggleBtn.style.right = '10px';
         toggleBtn.style.width = '0';
         toggleBtn.style.height = '0';
         // 修改为朝右的三角形
-        toggleBtn.style.borderTop = '6px solid transparent';  // 调整为原来的20%
-        toggleBtn.style.borderBottom = '6px solid transparent';  // 调整为原来的20%
-        toggleBtn.style.borderLeft = '12px solid rgba(255, 255, 255, 0.5)';  // 调整为原来的20%
+        toggleBtn.style.borderTop = '10px solid transparent';  // 调整为原来的20%
+        toggleBtn.style.borderBottom = '10px solid transparent';  // 调整为原来的20%
+        toggleBtn.style.borderLeft = '20px solid rgba(255, 255, 255, 0.5)';  // 调整为原来的20%
         toggleBtn.style.borderRight = 'none';
         toggleBtn.style.cursor = 'pointer';
-        toggleBtn.style.zIndex = '9999';
+        toggleBtn.style.zIndex = '2147483647';
         toggleBtn.title = '点击开关脚本，长按配置';
 
         // 创建发送联系方式按钮
@@ -113,20 +113,20 @@
     function toggleScript() {
         config.enabled = !config.enabled;
         saveConfig();
-        
+
         // 更新按钮显示
         const contactBtn = document.getElementById('shushubuyue-contact');
         if (contactBtn) {
             contactBtn.style.display = config.enabled ? 'block' : 'none';
         }
-        
+
         // 更新三角形按钮颜色
         const toggleBtn = document.getElementById('shushubuyue-toggle');
         if (toggleBtn) {
-            toggleBtn.style.borderLeftColor = config.enabled ? 
+            toggleBtn.style.borderLeftColor = config.enabled ?
                 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 0, 0, 0.5)';
         }
-        
+
         // 如果关闭脚本，停止所有自动操作
         if (!config.enabled) {
             firstAuto = true;
@@ -136,20 +136,20 @@
     // 发送联系方式（分开发送，一次三位）
     function sendContactInfo() {
         if (!config.enabled) return;
-        
+
         try {
             const msgInput = document.querySelector("#msgInput");
             const sendButton = document.querySelector(".button-link.msg-send");
-            
+
             if (!msgInput || !sendButton) return;
-            
+
             const contactText = config.contactInfo;
             const chunkSize = 3; // 每次发送3个字符
-            
+
             // 分段发送联系方式
             for (let i = 0; i < contactText.length; i += chunkSize) {
                 const chunk = contactText.substring(i, i + chunkSize);
-                
+
                 // 使用setTimeout延迟发送，确保按顺序发送
                 setTimeout(() => {
                     msgInput.value = chunk;
@@ -326,10 +326,10 @@
 
     function init() {
         createFloatingButtons();
-        
+
         setInterval(() => {
             if (!config.enabled) return;
-            
+
             var tab = document.querySelector("#partnerInfoText")
             if (tab) var tabText = tab.innerText
             if (tabText && typeof tabText == 'string' && tabText.indexOf("女生") != -1) {
